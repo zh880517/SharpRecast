@@ -43,5 +43,21 @@ namespace SharpRecast.Recast
             }
             Spans.Add(span);
         }
+
+        public void Combin(int walkableHeight)
+        {
+            for (int i = 1; i<Spans.Count; ++i)
+            {
+                Span pre = Spans[i - 1];
+                Span cur = Spans[i];
+                if (cur.Min - pre.Max < walkableHeight)
+                {
+                    pre.Max = cur.Max;
+                    Spans[i - 1] = pre;
+                    Spans.RemoveAt(i);
+                    --i;
+                }
+            }
+        }
     }
 }

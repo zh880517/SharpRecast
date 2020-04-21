@@ -13,12 +13,14 @@ namespace UnityEngine
             Max = max;
         }
 
-        public bool Overlap(Bounds b)
+        public bool Intersects(Bounds b)
         {
             return !(Min.x > b.Max.x || Max.x < b.Min.x
                 || Min.y > b.Max.y || Max.y < b.Min.y
                 || Min.z > b.Max.z || Max.z < b.Min.z);
         }
+
+
         public bool Equals(Bounds other)
         {
             return Min == other.Min && Max == other.Max;

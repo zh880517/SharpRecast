@@ -1,24 +1,21 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SharpRecast.NavGrid
 {
     public class MaskGrid
     {
-        public List<BitArray> Rows;
+        public BitArray Datas;
+        public int Width;
+        public int Height;
         public Vector2 Start;
         public float GridSize;
 
         public bool Get(int x, int y)
         {
-            if (y >= 0 && y < Rows.Count)
+            if (y >= 0 && y < Height && x >= 0 && x < Width)
             {
-                var array = Rows[y];
-                if (x >=0 && x<array.Count)
-                {
-                    return array[x];
-                }
+                return Datas[x * Width + y];
             }
             return false;
         }

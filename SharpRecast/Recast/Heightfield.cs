@@ -30,7 +30,7 @@ namespace SharpRecast.Recast
         public void RasterizeTriangle(Vector3 a, Vector3 b, Vector3 c)
         {
             Bounds bbox = MathHelper.GetBounds(a, b, c);
-            if (!bounds.Overlap(bbox))
+            if (!bounds.Intersects(bbox))
                 return;
             float[] distances = new float[12];
 
@@ -244,20 +244,6 @@ namespace SharpRecast.Recast
                 bounds = new Bounds(min, max)
             };
             return heightfield;
-        }
-
-        public void ClimbFilter(float climbHeight)
-        {
-            int height = (int)Math.Ceiling(climbHeight / CellSize);
-            for (int x=0; x<Width; ++x)
-            {
-                for (int y=0; y<Length; ++y)
-                {
-                    var cell = Cells[x * Width + y];
-                    if (cell.Spans.Count == 0)
-                        return;
-                }
-            }
         }
 
         private Cell Get(int x, int y)

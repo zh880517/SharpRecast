@@ -5,18 +5,16 @@ namespace SharpRecast.NavGrid
 {
     public class HeightFieldGrid
     {
-        public List<byte[]> Rows;
+        public List<byte> Datas;
+        public int Width;
+        public int Height;
         public Vector2 Start;
         public float GridSize;
         public byte Get(int x, int y)
         {
-            if (y >= 0 && y < Rows.Count)
+            if (y >= 0 && y < Height && x >=0 && x < Width)
             {
-                var array = Rows[y];
-                if (x >= 0 && x < array.Length)
-                {
-                    return array[x];
-                }
+                return Datas[x * Width + y];
             }
             return 0xFF;
         }
